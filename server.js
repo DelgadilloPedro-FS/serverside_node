@@ -1,27 +1,9 @@
 const http = require("http");
+require("dotenv").config();
+const app = require("./app")
 
-const todos = [
-  {
-    id: 1,
-    task: "task one",
-  },
-  {
-    id: 2,
-    task: "task two",
-  },
-  {
-    id: 3,
-    task: "task three",
-  },
-];
+const server = http.createServer(app);
 
-const server = http.createServer((req, res) => {
-  res.setHeader("content-type", "application/json");
-  res.end(JSON.stringify({ success: true, method: req.method, data: todos }));
-});
-
-const PORT = 3000;
-
-server.listen(PORT, () => {
-  console.log(`listening on port ${PORT}`);
+server.listen(process.env.PORT, () => {
+  console.log(`listening on port ${process.env.PORT}`);
 });
