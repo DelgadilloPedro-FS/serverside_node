@@ -30,7 +30,7 @@ router.get("/:id", (req, res) => {
       },
     });
   } else {
-    res.status(404).send({ error: "Cat not found" });
+    res.status(400).send({ error: "Cat not found" });
   }
 });
 
@@ -75,7 +75,6 @@ router.put("/:id", (req, res) => {
 router.delete("/:id", (req, res) => {
   const { id } = req.params;
   const deletedData = DATA.splice(id, 1);
-  try {
     if (DATA[id]) {
       res.status(200).json({
         message: "Delete by id /cat",
@@ -88,10 +87,6 @@ router.delete("/:id", (req, res) => {
     } else {
       res.status(400).send({ error: "Cat not found" });
     }
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({ error: "Internal Server Error" });
-  }
 });
 
 app.use("/cat", router);
